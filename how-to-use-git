@@ -1,0 +1,21 @@
+After you've accepted the invitation to collaborate, you can then clone the repository to your computer
+How to clone a repository:
+https://help.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository
+
+some useful git commands:
+init => initializes an empty repository in the directory you run the command in
+(adds a .git folder)
+clone => 
+add (filename or "." to add everything) => adds files to stage
+commit -m "commit message" => commits staged changes
+push => uploads commit to remote repository
+
+Example command sequences:
+# Cloning this repository
+Open Git Bash
+$ mkdir thisrepo && cd thisrepo
+$ git clone git@github.com:charlesancheta/bigkek.git
+# Uploading your changes to the repository
+$ git add . (if you want to stage all changes) or git add filename1 filename2 (and so on) (if you only want to change specific files)
+$ git commit -m "my lab solution"
+$ git push
