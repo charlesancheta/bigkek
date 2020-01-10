@@ -10,28 +10,25 @@ void main() {
   // generates random number from 0 to RAND_MAX (32767) and
   // modulos it by 101 to keep it between 0 and 100
   int generatedNumber = rand() % 101;
-  int wrongGuessCounter = 0;
+  int guessCounter = 0;
   bool correctGuess = false;
-  while (wrongGuessCounter < 6 && correctGuess == false) {
-    printf("Guess the number: ");
+  printf("Please guess a number: ");
+  while (correctGuess != true) {
     // pointers (&) are always used when using scanf except when 
     // assigning values to arrays (e.g. strings (character arrays))
     scanf("%d",&guessNumber);
     if (guessNumber > generatedNumber) {
-      printf("LOWER!\n");
-      wrongGuessCounter += 1;
+      printf("TOO LARGE\n");
     } else if (guessNumber < generatedNumber) {
-      printf("HIGHER!\n");
-      wrongGuessCounter += 1;
+      printf("TOO SMALL\n");
     } else {
-      printf("GUESSED RIGHT!\n");
+      printf("FOUND\n");
       correctGuess = true;
     }
+    if (correctGuess == false) {
+      printf("Please try again: ");
+    }
+    guessCounter += 1;
   }
-  if (correctGuess == true) {
-    printf("YOU WIN!\n");
-  } else {
-    printf("YOU LOSE!\nTHE NUMBER WAS: %d\n",generatedNumber);
-    
-  }
+  printf("No. of tries: %d", guessCounter);
 }
