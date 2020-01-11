@@ -8,13 +8,18 @@ init => initializes an empty repository in the directory you run the command in
 clone => 
 add (filename or "." to add everything) => adds files to stage
 commit -m "commit message" => commits staged changes
-push => uploads commit to remote repository
+push => uploads commit from your computer to remote repository
+pull => downloads lastest commit from remote repository to your computer
 
 Example command sequences:
 # Cloning this repository
 Open Git Bash
 $ mkdir thisrepo && cd thisrepo
 $ git clone git@github.com:charlesancheta/bigkek.git
+# Downloading the changes from the repository
+$ git pull
+(A merge conflict might happen if there are conflicting lines in the code,
+Search up about resolving merge conflict if it happens :( )
 # Uploading your changes to the repository
 $ git add . (if you want to stage all changes) or git add filename1 filename2 (and so on) (if you only want to change specific files)
 $ git commit -m "my lab solution"
