@@ -5,7 +5,6 @@
 typedef enum {true, false} bool;
 void main() {
   // uses current time as random seed
-  srand(time(0));
   int counter = 0;
   int min, max, option;
   printf("Range: minimum ");

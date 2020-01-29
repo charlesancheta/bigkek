@@ -20,7 +20,7 @@ int main(void){
     //program guesses the number until it gets it right by asking for hints 
     while (true) {
     program_gussed_number =  (min + max)/2;
-    printf("Guessed number : %d \n", program_gussed_number);1
+    printf("Guessed number : %d \n", program_gussed_number);
     printf(" 1. TOO LARGE \n 2. TOO SMALL \n 3. FOUND \n"); //ask user to select one of the options
     scanf("%d", &user_hint);
 
