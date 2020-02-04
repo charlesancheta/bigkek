@@ -30,10 +30,7 @@ blt Error
 cmp.l #0x39, %d2
 bgt Uppercase
 sub.l #0x30, %d2
-move.l %d2, %a3
-add.l #4, %a2
-add.l #4, %a3
-bra Repeat
+bra increment
 
 Uppercase:
 cmp.l #0x41, %d2
@@ -41,10 +38,7 @@ blt Error
 cmp.l #0x46, %d2
 bgt Lowercase
 sub.l #0x31, %d2
-move.l %d2, %a3
-add.l #4, %a2
-add.l #4, %a3
-bra Repeat
+bra increment
 
 Lowercase:
 cmp.l #0x61, %d2
@@ -52,14 +46,14 @@ blt Error
 cmp.l #0x66, %d2
 bgt Error
 sub.l #0x61, %d2
-move.l %d2, %a3
-add.l #4, %a2
-add.l #4, %a3
-bra Repeat
-
+bra increment
 
 Error:
-move.l 0xFFFFFFFF, %a3
+move.l 0xFFFFFFFF, %a2
+bra increment
+
+increment:
+move.l %d2, %a3
 add.l #4, %a2
 add.l #4, %a3
 bra Repeat
