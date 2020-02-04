@@ -49,7 +49,7 @@ sub.l #0x61, %d2
 bra increment
 
 Error:
-move.l 0xFFFFFFFF, %a2
+move.l 0xFFFFFFFF, %d2
 bra increment
 
 increment:
