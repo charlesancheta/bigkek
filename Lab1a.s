@@ -13,7 +13,7 @@ movem.l %d2-%d7/%a2-%a5,(%a7)
 /* File Name: Lab1a.s *********************************************/
 /* Names of Students: Charles Ancheta and Mustafa Farow          **/
 /* Date: February 4, 2020                                        **/
-/* General Description:                                          **/
+/* General Description: Converts alphanumeric character to HEX   **/
 /*                                                               **/
 /******************************************************************/
 
@@ -22,7 +22,7 @@ move.l #0x43000000, %a2
 move.l #0x43100000, %a3
 
 Repeat:
-move.l %a2, %d2
+move.l (%a2), %d2
 cmpi.l #0xd, %d2
 beq Exit
 cmp.l #0x30, %d2
@@ -37,7 +37,7 @@ cmp.l #0x41, %d2
 blt Error
 cmp.l #0x46, %d2
 bgt Lowercase
-sub.l #0x31, %d2
+sub.l #0x37, %d2
 bra increment
 
 Lowercase:
@@ -45,7 +45,7 @@ cmp.l #0x61, %d2
 blt Error
 cmp.l #0x66, %d2
 bgt Error
-sub.l #0x61, %d2
+sub.l #0x57, %d2
 bra increment
 
 Error:
@@ -53,7 +53,7 @@ move.l 0xFFFFFFFF, %d2
 bra increment
 
 increment:
-move.l %d2, %a3
+move.l %d2, (%a3)
 add.l #4, %a2
 add.l #4, %a3
 bra Repeat
