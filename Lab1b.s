@@ -28,11 +28,11 @@ cmpi.l #0xD, %d2
 beq Exit
 cmp.l #0x41, %d2
 blt Error
-cmp.l #0x46, %d2
+cmp.l #0x5b, %d2
 blt Uppercase
 cmp.l #0x61, %d2
 blt Error
-cmp.l #0x66, %d2
+cmp.l #0x7b, %d2
 bgt Error
 sub.l #0x20, %d2
 bra increment
