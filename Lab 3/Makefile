@@ -8,6 +8,10 @@ OBJ := $(SRC:src/%.c=obj/%.o)
 EXE := lab3
 # compiler flags
 CFLAGS := -Wall -O2 -Iinclude
+# add -g flag to CFLAGS to debug
+
+# linker flags
+LFLAGS := 
 # -Wall will show all warnings that are otherwise suppressed
 # -O2 optimizes your code
 # -I(header directory) includes all the header files needed for compilation
@@ -18,7 +22,7 @@ all: $(EXE)
 
 # links all object files to the executable
 $(EXE): $(OBJ)
-	$(CC) $(OBJ) -o $(EXE)
+	$(CC) $(OBJ) -o $(EXE) $(LFLAGS)
 
 # compiles every source code in src/
 # into an object file and placed into obj/
