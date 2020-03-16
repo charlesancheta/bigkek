@@ -65,10 +65,9 @@ int main(void) {
     }
 
     // Conversion from ASCII to Base64
-    for (int i = TO_SIZE; i > 0; i--) {
+    for (int i = TO_SIZE - 1; i >= 0; i--) {
       // get 6 LSB to encode to Base 64
-      char encodedByte = num & LSB_6; 
-      buf_out[i - 1] = keys[encodedByte]; 
+      buf_out[i] = keys[num & LSB_6]; 
       num >>= 6; // shift to get next 6 bits
     }
 
@@ -91,6 +90,7 @@ int main(void) {
   // is not a multiple of 3
   if (bytesRead) {
     unsigned int num = 0;
+
     for (int i = 0; i < bytesRead; i++) {
       num <<= 8;
       num |= buf_in[i];
