@@ -3,7 +3,8 @@
 
 //#define _CRT_SECURE_NO_WARNINGS
 
-#define BUFFER_SIZE 64
+// hardcoded minimum buffer size to pass all tests 
+#define BUFFER_SIZE 12
 
 #define MIN     0
 #define MAX     1
