@@ -33,3 +33,4 @@ obj:
 # removes all files and executables
 clean:
 	@rm $(OBJ) $(EXE)
+	@rmdir obj
