@@ -1,0 +1,9 @@
+Best Way to organize your code
+
+include/ should have all your header (.h) files
+src/ should have all your source code (.c) files
+obj/ is where your compiled object files (.o) will go
+
+Also makes it compatible with your makefile
+- To change the name of the program, go to the Makefile and change the EXE variable
+- To compile your code and make an executable, type "make" on the command line
