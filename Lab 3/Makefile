@@ -26,6 +26,8 @@ obj/%.o: src/%.c | obj
 	$(CC) $(CFLAGS) -c $< -o $@
 # $< - first subtarget (in this case src/%.c)
 # $@ - self (obj/%.o)
+
+# creates obj directory if not yet created
 obj:
 	mkdir $@
 # removes all files and executables
