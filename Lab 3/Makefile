@@ -22,11 +22,12 @@ $(EXE): $(OBJ)
 
 # compiles every source code in src/
 # into an object file and placed into obj/
-obj/%.o: src/%.c
+obj/%.o: src/%.c | obj
 	$(CC) $(CFLAGS) -c $< -o $@
 # $< - first subtarget (in this case src/%.c)
 # $@ - self (obj/%.o)
-
+obj:
+	mkdir $@
 # removes all files and executables
 clean:
 	@rm $(OBJ) $(EXE)
