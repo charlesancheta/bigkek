@@ -3,12 +3,16 @@
 // Assignment 2 Program 1
 // ----------------------
 
+/*
+NOTE: This hardcodes the number of lines read.
+      This is not necessarily a bad thing for part 1
+      as they probably expect you to do this.
+      Refer to version 2 for an implementation 
+      that does not use an array of strings.
+*/
+
 #include <stdio.h>
 #include <string.h>
-
-// NOTE: THIS HARDCODES A PRETTY IMPORTANT PART
-// OF THE ASSIGNMENT
-// PLEASE USE VERSION 2
 
 #define BUFFER_SIZE 128
 // number of lines is hardcoded
