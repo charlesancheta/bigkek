@@ -1,20 +1,23 @@
-// ----------------------
+// ----------------------------
 // ECE 220, Winter 2020
-// Assignment 2 Program 1
-// ----------------------
+// Assignment 2 Program 1 
+// Version 1
+// ----------------------------
 
 /*
 NOTE: This hardcodes the number of lines read.
       This is not necessarily a bad thing for part 1
       as they probably expect you to do this.
-      Refer to version 2 for an implementation 
+      Refer to the second version for an implementation 
       that does not use an array of strings.
 */
 
 #include <stdio.h>
-#include <string.h>
+#include <string.h> // for strcpy()
 
-#define BUFFER_SIZE 128
+// maximum length of string that can be read from file
+#define MAX_STR_LEN 128
+
 // number of lines is hardcoded
 // more should be allocated depending on the file 
 // although this does the job for part 1
@@ -23,15 +26,17 @@ NOTE: This hardcodes the number of lines read.
 int main() {
   FILE* file = fopen("test.txt", "r");
   // make an array of strings
-  char strArray[NUM_LINES][BUFFER_SIZE];
+  char strArray[NUM_LINES][MAX_STR_LEN];
   // use to read from file
-  char readString[BUFFER_SIZE];
+  char readString[MAX_STR_LEN];
   int counter = 0;
 
   // reserved for first line to set min and max
-  char* readLine = fgets(readString, BUFFER_SIZE, file);
+  
+  char* readLine = fgets(readString, MAX_STR_LEN, file);
   // copy string to the string array
   strcpy(strArray[0], readString);
+  // does not count newline character in length
   int strLen = strlen(readString) - 1;
   int min = strLen;
   int max = strLen;
@@ -39,7 +44,7 @@ int main() {
   int maxIndex = counter;
   counter++;
 
-  readLine = fgets(readString, BUFFER_SIZE, file);
+  readLine = fgets(readString, MAX_STR_LEN, file);
   while (readLine != NULL) {
     strcpy(strArray[counter], readString);
     // subtract the newline from the string length
@@ -57,7 +62,7 @@ int main() {
     }
 
     counter++;
-    readLine = fgets(readString, BUFFER_SIZE, file);
+    readLine = fgets(readString, MAX_STR_LEN, file);
   }
   fclose(file);
   

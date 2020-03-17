@@ -1,17 +1,13 @@
 // ----------------------------
 // ECE 220, Winter 2020
-// Assignment 2 Program 1 
-// Version 2
+// Assignment 2 Program 2 
+// Version 1
 // ----------------------------
 
-/* 
-NOTE: This program already can read any number of lines
-      as it only stores the shortest and longest strings.
-      Simply adding an implementation of reversing a string and 
-      writing that to a file completes the requirement for Part 2.
-      However, this does not use dynamically allocated memory 
-      and you might get deductions. (I think it's dumb that 
-      you're required to use malloc() and free() for that task.) 
+/*
+NOTE: This version DOES NOT use malloc() and free().
+      Although it would work with any number of lines,
+      You will get deductions for not using dynamic memory.
 */
 
 #include <stdio.h>
@@ -20,25 +16,55 @@ NOTE: This program already can read any number of lines
 // maximum length of string that can be read from file
 #define MAX_STR_LEN 128
 
-int main() {
-  FILE* file = fopen("test.txt", "r");
-  // used to read from file
-  char readStr[MAX_STR_LEN];
+/* char *strrev(char *str): reverses a string
 
-  // used to store the shortest and longest strings
+Implementation is missing in Linux. If you are using Windows,
+try to comment this code out first and see if it works. */
+
+char *strrev(char *str) {
+  
+  // return if NULL
+  if (!str || ! *str) {
+    return str;
+  }
+  
+  // start reversing string
+  int i = strlen(str) - 1, j = 0;
+  char ch;
+  while (i > j) {
+    ch = str[i];
+    str[i] = str[j];
+    str[j] = ch;
+    i--; j++;
+  }
+  return str;
+}
+
+int main() {
+  // open files for input and output
+  FILE* fileIn = fopen("test.txt", "r");
+  FILE* fileOut = fopen("test_reverse.txt", "w");
+
+  // use to read from file
+  char readStr[MAX_STR_LEN];
   char shortStr[MAX_STR_LEN], longStr[MAX_STR_LEN];
 
+  // reserved for first line to set min and max
   int counter = 0;
-  fgets(readStr, MAX_STR_LEN, file);
+  fgets(readStr, MAX_STR_LEN, fileIn);
+
   // first line is both the shortest and longest string
   strcpy(shortStr, readStr);
   strcpy(longStr, readStr);
   int minIndex = counter, maxIndex = counter;
   counter++;
+  
+  // write the reversed form of the string to fileOut
+  fprintf(fileOut, "%s", strrev(readStr));
 
   // keeps reading until end of file is reached 
   // i.e. when fgets() returns a null pointer
-  while (fgets(readStr, MAX_STR_LEN, file) != NULL) {
+  while (fgets(readStr, MAX_STR_LEN, fileIn) != NULL) {
     // only process the line if there is anything other than newline
     if (strlen(readStr) - 1) {
 
@@ -54,19 +80,25 @@ int main() {
         // read line is now the longest line
         strcpy(longStr, readStr);
         maxIndex = counter;
+      
       }
     }
+    // write reversed string on fileOut
+    fprintf(fileOut, "%s", strrev(readStr));
 
     counter++;
   }
-  fclose(file);
+
+  // close files
+  fclose(fileIn);
+  fclose(fileOut);
   
   // print results
   printf("*** Number of read statements: %d\n", counter);
   printf("*** ID of the shortest statement: %d\n", minIndex);
   printf("*** ID of the longest statement: %d\n\n", maxIndex);
 
-  // do not count newline in character count
+  // does not count newline in character count
   printf("SHORTEST: length = %ld; statement = %s", strlen(shortStr) - 1, shortStr);
   printf("LONGEST: length = %ld; statement = %s", strlen(longStr) - 1, longStr);
 

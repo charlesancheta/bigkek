@@ -1,24 +1,29 @@
-// ----------------------
+// ----------------------------
 // ECE 220, Winter 2020
-// Assignment 2 Program 2 Version 1
-// ----------------------
+// Assignment 2 Program 2 
+// Version 2 WORK IN PROGRESS
+// ----------------------------
 
 /*
-NOTE: This version does NOT use malloc() and free().
-      Although it would work with any number of lines,
-      You will get deductions for not using dynamic memory.
+NOTE: This version DOES use malloc() and free().
+AHHHHH I DON'T SEE A WAY TO DO THIS WITH MALLOC
+WHY ARE YOU REQUIRED TO DO THIS IT'S SO DUMB
+THIS REALLY DOESN'T NEED MALLOC AT ALL
 */
-
 
 #include <stdio.h>
 #include <string.h>
 
-#define BUFFER_SIZE 128
+#include "memory.h" // for my_malloc() and my_free()
 
-// function to reverse a string
-// implementation is missing in Linux
-// if you are using Windows
-// try to comment this code out first and see if it works
+// maximum length of string that can be read from file
+#define MAX_STR_LEN 128
+
+/* char *strrev(char *str): reverses a string
+
+Implementation is missing in Linux. If you are using Windows,
+try to comment this code out first and see if it works. */
+
 char *strrev(char *str) {
   
   // return if NULL
@@ -38,28 +43,43 @@ char *strrev(char *str) {
   return str;
 }
 
+/* void replaceStr(char**, char**): replaces old string pointer and frees memory
+
+We use ** because the start of a string is itself a pointer,
+so we need to free the pointer of a pointer. */ 
+
+void replaceStr(char **oldStr, char **newStr) {
+  // frees memory of old string
+  my_free(oldStr);
+  // point old string to new string
+  *oldStr = *newStr;
+}
+
 int main() {
   // open files for input and output
   FILE* fileIn = fopen("test.txt", "r");
   FILE* fileOut = fopen("test_reverse.txt", "w");
 
   // use to read from file
-  char readStr[BUFFER_SIZE];
-  char shortStr[BUFFER_SIZE], longStr[BUFFER_SIZE];
+  char readStr[MAX_STR_LEN];
+  char shortStr[MAX_STR_LEN], longStr[MAX_STR_LEN];
 
   // reserved for first line to set min and max
   int counter = 0;
-  fgets(readStr, BUFFER_SIZE, fileIn);
+  fgets(readStr, MAX_STR_LEN, fileIn);
+
+  // first line is both the shortest and longest string
   strcpy(shortStr, readStr);
   strcpy(longStr, readStr);
   int minIndex = counter, maxIndex = counter;
   counter++;
   
-  // write the reversed form to file
+  // write the reversed form of the string to fileOut
   fprintf(fileOut, "%s", strrev(readStr));
 
-
-  while (fgets(readStr, BUFFER_SIZE, fileIn) != NULL) {
+  // keeps reading until end of file is reached 
+  // i.e. when fgets() returns a null pointer
+  while (fgets(readStr, MAX_STR_LEN, fileIn) != NULL) {
     // only process the line if there is anything other than newline
     if (strlen(readStr) - 1) {
 
@@ -78,7 +98,7 @@ int main() {
       
       }
     }
-    // write reversed string on file
+    // write reversed string on fileOut
     fprintf(fileOut, "%s", strrev(readStr));
 
     counter++;
