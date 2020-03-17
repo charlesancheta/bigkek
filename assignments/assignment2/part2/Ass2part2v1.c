@@ -49,7 +49,7 @@ int main() {
   char readStr[MAX_STR_LEN];
   char shortStr[MAX_STR_LEN], longStr[MAX_STR_LEN];
 
-  // reserved for first line to set min and max
+  // read first line
   int counter = 0;
   fgets(readStr, MAX_STR_LEN, fileIn);
 
@@ -82,11 +82,14 @@ int main() {
         maxIndex = counter;
       
       }
+      // NOTE: this only counts the number of statements.
+      // If you want the index to also count empty lines,
+      // move this outside the if statement.
+      counter++; 
     }
     // write reversed string on fileOut
     fprintf(fileOut, "%s", strrev(readStr));
 
-    counter++;
   }
 
   // close files

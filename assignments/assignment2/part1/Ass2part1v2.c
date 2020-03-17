@@ -55,9 +55,11 @@ int main() {
         strcpy(longStr, readStr);
         maxIndex = counter;
       }
+      // NOTE: this only counts the number of statements.
+      // if you want the index to also count empty lines,
+      // move this outside the if statement
+      counter++;       
     }
-
-    counter++;
   }
   fclose(file);
   

@@ -59,9 +59,10 @@ int main() {
         max = strLen;
         maxIndex = counter;
       }
+      // only count the number of statements (ignore empty lines)
+      counter++;
     }
 
-    counter++;
     readLine = fgets(readString, MAX_STR_LEN, file);
   }
   fclose(file);

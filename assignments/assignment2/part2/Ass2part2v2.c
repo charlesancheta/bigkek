@@ -95,13 +95,15 @@ int main() {
         // read line is now the longest line
         strcpy(longStr, readStr);
         maxIndex = counter;
-      
       }
+      
+      // NOTE: this only counts the number of statements.
+      // If you want the index to also count empty lines,
+      // move this outside the if statement.
+      counter++; 
     }
     // write reversed string on fileOut
     fprintf(fileOut, "%s", strrev(readStr));
-
-    counter++;
   }
 
   // close files
