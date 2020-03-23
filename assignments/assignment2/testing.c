@@ -2,6 +2,7 @@
 
 int main() {
   // SERIOUSLY FCK MALLOC
+  // THIS IS WHAT YOU GET 
   FILE* f = fopen("test.txt", "r");
   char hi[128];
   char* read = fgets(hi, 128, f);

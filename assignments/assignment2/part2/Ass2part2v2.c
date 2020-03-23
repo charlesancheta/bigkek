@@ -6,7 +6,7 @@
 
 /*
 NOTE: This version DOES use my_malloc() and my_free().
-
+It reads
 */
 
 #include <stdio.h>
