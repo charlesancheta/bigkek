@@ -6,7 +6,10 @@
 
 /*
 NOTE: This version DOES use my_malloc() and my_free().
-It reads
+      It reads the strings, store them in a dynamically 
+      allocated array, display the results, and write 
+      the statements to the file in a reverse memory while
+      freeing each memory as they are used
 */
 
 #include <stdio.h>
