@@ -5,9 +5,9 @@
 // ----------------------------
 
 /*
-NOTE: This version DOES NOT use malloc() and free().
-      Although it would work with any number of lines,
-      You will get deductions for not using dynamic memory.
+NOTE: DO NOT USE THIS CODE. I misinterpreted the 
+      instructions and just reversed the strings 
+      as I wrote them. Dum me 
 */
 
 #include <stdio.h>
