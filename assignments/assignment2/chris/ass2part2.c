@@ -32,14 +32,11 @@ test_reversed=  fopen(filerev,"w"); // opening text_reversed file and reading
         return 1;
     }
 while(1){ //infinite loop, works for any amount of read statements//
-    endfile = fgetc(test);
-    if(endfile==EOF)// at the end of the file break the loop//
-        break;
-    else //if not the end, continue//
-    fgets(charstr,characters, test); //read a line from the file "test" and stores it in charstr
+    //read a line from the file "test" and stores it in charstr
+    if (fgets(charstr,characters, test) == NULL) {break;}
     if (strlen(charstr) > 1) { // condition
        totalchar = strlen(charstr); // store length of string into total char
-        stringlines[num]= (char *) my_malloc(totalchar * sizeof(char));
+        stringlines[num]= (char *) my_malloc(totalchar+1 * sizeof(char));
         strcpy(stringlines[num],charstr); //copying the string from charstr and storing it into the array of strings
 
         if (totalchar > max) { // if total char is greater than max
@@ -51,10 +48,9 @@ while(1){ //infinite loop, works for any amount of read statements//
             min = totalchar; // total char becomes the new min
             linecountmin = num; // linecount min is the ID of the smallest line
             strcpy(charmin, charstr); // copy statement from text file and store it in char min
-
         }
+      num++;
     }
-    num++;
 }
 printf("***Number of statements : %d\n",num);
 printf("***ID of the shortest Statement: %d \n",linecountmin);
@@ -63,9 +59,8 @@ printf("SHORTEST: length = %d; statement = %s \n",min,charmin);
 printf("LONGEST: length = %d; statement = %s \n", max, charmax);
 
     while(num>0) {
-
-        fprintf(test_reversed, "%s", stringlines[num-1]);
-        my_free(stringlines[(num--)-1]);
+      fprintf(test_reversed, "%s\n", stringlines[num-1]);
+      my_free(stringlines[(num--)-1]);
     }
     my_free(stringlines);
     fclose(test);
