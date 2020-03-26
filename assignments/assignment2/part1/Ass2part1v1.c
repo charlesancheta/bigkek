@@ -21,7 +21,7 @@ NOTE: This hardcodes the number of lines read.
 // number of lines is hardcoded
 // more should be allocated depending on the file 
 // although this does the job for part 1
-#define NUM_LINES 18
+#define NUM_LINES 10
 
 int main() {
   FILE* file = fopen("test.txt", "r");
