@@ -1,4 +1,4 @@
-#include <stdio.h>
+#include <iostream>
 #include <stdlib.h>
 
 int roll() {
@@ -12,7 +12,6 @@ int testroll() {
 }
 
 int main() {
-  // srand(time(NULL));
   int x, rollsum, freqs[5] = {};
   unsigned int sum = 0;
   scanf("%d", &x);
@@ -25,6 +24,6 @@ int main() {
   for (int i = 0; i < 9; i++) {
     printf("%2d %8d\n", i+2, freqs[i]);
   }
-  printf("Mean value is: %d\n", sum/x);
+  std::cout << "Mean value is: " << sum/x << '\n';
   return 0;
 }
