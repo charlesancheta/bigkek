@@ -9,7 +9,6 @@
 #include "bank.h"
 #include "io.h"
 #include "main.h"
-#pragma warning(disable: 4996) // to disable _s function warning on Visual Studio 
 
 int main(void) {
     char message[512];
@@ -31,7 +30,6 @@ int main(void) {
         if (readRecord(&currentDay, name, action, type, &amount)) {
             currentDay = FINAL_DAY + 1;
         }
-        printf("%d %s %s %s %d", currentDay, name, action, type, amount);
         while (day < currentDay) {
             updateData(day);
             day++;

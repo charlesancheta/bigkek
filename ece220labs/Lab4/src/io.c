@@ -5,7 +5,6 @@
 #include<stdlib.h>
 #include<string.h>
 #include "io.h"
-#pragma warning(disable: 4996) // to disable _s function warnings on Visual Studio 
 
 static FILE* inputFile;
 static FILE* outputFile;
@@ -27,12 +26,13 @@ int readRecord(int* currentDay, char* name, char* action, char* type, int* amoun
   sscanf(message, "%d %s %s %s %d.%d", currentDay, name, action, type, amount, &cents);
   
   *amount = (*amount * 100) + cents;
+  return 0;
 }
 
 // this function writes into an output file
 // based on the requested format
 void writeRecord(int day, char* message) {
-  fprintf(outputFile, "[%3d] %s", day, message);
+  fprintf(outputFile, "[%3d] %s\n", day, message);
 }
 
 // this function closes the files

@@ -14,7 +14,7 @@ void* safe_malloc(size_t size) {
         maxMemory = totalMemory;
     }
     fprintf(stdout, "{%3lld} ", calls);
-    fprintf(stdout, "Alocated %4lld bytes | ", *((long long*)tmp));
+    fprintf(stdout, "Allocated %4lld bytes | ", *((long long*)tmp));
     fprintf(stdout, "Current Memory Usage: %4lld bytes | ", totalMemory);
     fprintf(stdout, "Max Memory Usage: %4lld bytes\n", maxMemory);
     calls++;
