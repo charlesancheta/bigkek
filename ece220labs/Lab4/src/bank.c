@@ -12,6 +12,12 @@ static int currentAccounts;
 static int totalProfit;
 
 
+/* NOTE: There is a mistake on the input file at line 17:
+  The test output expects this: 75  Afshin Deposit  Savings  2.50
+  But we were given this: 75  Afshin Deposit  Savings  2.51
+  Seems like a dick move tbh but maybe my files are just outdated
+*/
+
 // this function allocated memory for array of pointers to accounts
 void openBank(int maxAccounts) {
   accounts = (struct account**) safe_malloc(maxAccounts * sizeof(struct account*));
