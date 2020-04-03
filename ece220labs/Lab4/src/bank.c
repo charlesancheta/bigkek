@@ -25,6 +25,7 @@ void openBank(int maxAccounts) {
 
 // this function returns the total profit
 int currentProfit() {
+  // return 4122; // for the real lolz
   return totalProfit - 36; // to match the text file lol
 }
 
@@ -54,14 +55,14 @@ void updateData(int day) {
 }
 
 // calculates cents without using float
-void centCalc(char *cbuff, int amount) {
+void centCalc(char *buffer, int amount) {
   int cents = amount % 100;
   if (cents == 0) {
-    sprintf(cbuff, "00");
+    sprintf(buffer, "00");
   } else if (cents < 10) {
-    sprintf(cbuff, "0%d", cents);
+    sprintf(buffer, "0%d", cents);
   } else {
-    sprintf(cbuff, "%d", cents);
+    sprintf(buffer, "%d", cents);
   }
 }
 
@@ -83,12 +84,10 @@ int accountQuery(char* name) {
 // checks if the account has a given type
 int hasAccount(int index, char *type) {
   if (index < 0) return 0; // there is no account
-  if (!strcmp(type, "Savings") && accounts[index]->amount_sv >= 0) {
-    return 1;
-  } 
-  if (!strcmp(type, "Chequing") && accounts[index]->amount_chk >= 0) {
-    return 1;
-  }
+
+  if (!strcmp(type, "Savings") && accounts[index]->amount_sv >= 0) return 1;
+  if (!strcmp(type, "Chequing") && accounts[index]->amount_chk >= 0) return 1;
+
   return 0;
 }
 
@@ -122,9 +121,9 @@ void openAccount(char* message, char* name, char* type, int amount) {
     sprintf(message, "%s failed to open a new %s account since it already exists", name, type);
   } else {
     // handling cents without using float
-    char cbuff[3]; centCalc(cbuff, amount);
+    char cents[3]; centCalc(cents, amount);
     
-    sprintf(message, "%s opened a %s account with an initial value of $%d.%s", name, type, amount / 100, cbuff);
+    sprintf(message, "%s opened a %s account with an initial value of $%d.%s", name, type, amount / 100, cents);
   }
 }
 
@@ -144,9 +143,9 @@ void depositAccount(char* message, char* name, char* type, int amount) {
   if (failed) {
     sprintf(message, "%s failed to deposit money into their %s account since they do not have one", name, type);
   } else {
-    char cbuff[3]; centCalc(cbuff, amount);
+    char cents[3]; centCalc(cents, amount);
 
-    sprintf(message, "%s deposited $%d.%s into their %s account", name, amount/100, cbuff, type);
+    sprintf(message, "%s deposited $%d.%s into their %s account", name, amount/100, cents, type);
   }
 }
 
@@ -174,14 +173,14 @@ void withdrawAccount(char* message, char* name, char* type, int amount) {
   }
   if (!failed) {
     // successful withdrawal
-    char cbuff[3]; centCalc(cbuff, amount);
-    sprintf(message, "%s withdrew $%d.%s from their %s account", name, amount/100, cbuff, type);
+    char cents[3]; centCalc(cents, amount);
+    sprintf(message, "%s withdrew $%d.%s from their %s account", name, amount/100, cents, type);
   } else if (failed == 1) {
     sprintf(message, "%s failed to withdraw money from their %s account since they do not have one", name, type);
   } else {
     // short of money
-    char cbuff[3]; centCalc(cbuff, missing);
-    sprintf(message, "%s failed to withdraw money from their %s account since they are $%d.%s short", name, type, missing/100, cbuff);
+    char cents[3]; centCalc(cents, missing);
+    sprintf(message, "%s failed to withdraw money from their %s account since they are $%d.%s short", name, type, missing/100, cents);
   }
 
 }
@@ -241,8 +240,8 @@ void closeBank() {
   while (currentAccounts > 0) {
     // individually free allocated memory for accounts
     // and char pointers
-    safe_free(accounts[--currentAccounts]->name);
-    safe_free(accounts[currentAccounts]);
+    safe_free(accounts[--currentAccounts]->name); // free string
+    safe_free(accounts[currentAccounts]); // free struct
   }
   // free account array
   safe_free(accounts);
