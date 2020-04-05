@@ -24,7 +24,7 @@ LedSub:
 lea      -40(%a7),%a7 
 movem.l %d2-%d7/%a2-%a5,(%a7) /* back up registers */
 
-move.l $$(%a7), %d2 /* get the pattern address */
+move.l 44(%a7), %d2 /* get the pattern address */
 
 
 
