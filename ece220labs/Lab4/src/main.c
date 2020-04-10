@@ -15,9 +15,7 @@ int main(void) {
     printf(INPUT_FILE);
     initializeIO(INPUT_FILE, OUTPUT_FILE);
 
-    openBank(10);
-    int j;
-
+    openBank(NO_ACCOUNTS);
 
     for (int day = 1; day <= FINAL_DAY;) {
 
@@ -26,7 +24,6 @@ int main(void) {
         char name[256];
         char action[16];
         char type[16];
-        int k = 0;
         if (readRecord(&currentDay, name, action, type, &amount)) {
             currentDay = FINAL_DAY + 1;
         }
@@ -52,7 +49,7 @@ int main(void) {
         else {
             sprintf(message, "Invalid Action by %s!", name);
         }
-        printf(message);
+        printf("%s", message);
         printf("\n");
         writeRecord(day, message);
     }
