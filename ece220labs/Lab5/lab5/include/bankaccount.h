@@ -3,7 +3,6 @@
 
 #include <iostream>
 #include <string.h>
-using namespace std;
 
 const int maxNameLen = 40;
 
