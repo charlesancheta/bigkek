@@ -3,11 +3,12 @@
 
 using namespace std;
 
-char* stringAlloc(char* str) {
-  char* string = new char[strlen(str) + 1];
-  strcpy(string, str);
-  return string;
-}
+/* 
+  NOTE: This does not use dynamic memory allocation but instead uses initializer
+  lists I don't really know if this is in the scope of your course
+  Not recommended for this assignment since you're probably expected to use
+  new char[] and delete[] but it's still good to know
+*/
 
 class CD {
 protected:
@@ -16,15 +17,10 @@ protected:
     int no_tracks;
     double playtime;
 public:
-    CD(char *label_n, int no, double time) : no_tracks(no), playtime(time) {
-      label = stringAlloc(label_n);
-    };
-    ~CD() {
-      // use delete[] instead of delete when deleting
-      //  arrays or else it will only free the pointer (first character)
-      delete[](label); 
-    };
-    void display();
+    CD(char *label_n, int no, double time) : label(label_n), no_tracks(no), playtime(time) {};
+    // change the name so it will not be overriden 
+    // by the subclasses' display() methods
+    void display(); 
 };
 
 void CD::display() {
@@ -40,15 +36,8 @@ private:
     //char artist[ARTIST_LEN];
     char * artist;
 public:
-    popRockCD(char * label_n, int no, double time, 
-              char * title_n, char * artist_n) : CD(label_n, no, time) {
-      title = stringAlloc(title_n);
-      artist = stringAlloc(artist_n);
-    };
-    ~popRockCD() {
-      delete[](title);
-      delete[](artist);
-    };
+    popRockCD(char * label_n, int no, double time, char * title_n, char * artist_n) 
+              : CD(label_n, no , time), title(title_n), artist(artist_n) {};
     void display();
 };
 
@@ -56,7 +45,7 @@ void popRockCD::display() {
   cout << "*****" << endl;
   cout << "Title: " << title << endl;
   cout << "Artist: " << artist << endl;
-  CD::display(); // call the parent class method
+  CD::display(); // call parent class method
   cout << "*****" << endl;
 } 
 
@@ -69,17 +58,8 @@ private:
     //char performer[PERFORMER_LEN];
     char *performer;
 public:
-    classicCD(char *label_n, int no, double time, char *title_n, 
-              char *composer_n, char *performer_n) : CD(label_n, no, time) {
-      title = stringAlloc(title_n);
-      composer = stringAlloc(composer_n);
-      performer = stringAlloc(performer_n);
-    };
-    ~classicCD() {
-      delete[](title);
-      delete[](composer);
-      delete[](performer);
-    };
+    classicCD(char * label_n, int no, double time, char * title_n, char * composer_n, char * performer_n)
+              : CD(label_n, no, time), title(title_n), composer(composer_n), performer(performer_n) {};
     void display();
 };
 
@@ -88,9 +68,9 @@ void classicCD::display() {
   cout << "Title: " << title << endl;
   cout << "Composer: " << composer << endl;
   cout << "Performer: " << performer << endl;
-  CD::display(); // call the parent class method
+  CD::display();
   cout << "*****" << endl;
-} 
+}
 
 int main() {
     char label_pR[] = "Columbia";

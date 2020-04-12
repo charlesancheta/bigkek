@@ -2,12 +2,9 @@
 using namespace std;
 
 // savings bank account constructor
-saveBankAccount::saveBankAccount(char *n, int a_no, double bal, 
-                                 double intRate, int maxWD) 
+saveBankAccount::saveBankAccount(char *n, int a_no, double bal, double intRate, 
+                                 int maxWD) : BankAccount(n, a_no, bal) 
 {
-  strcpy(name, n);
-  account_number = a_no;
-  balance = bal;
   interestRate = intRate;
   MAXnoWithDraws = maxWD;
   noWithdraws = 0;
